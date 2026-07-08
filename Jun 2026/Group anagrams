@@ -1,0 +1,80 @@
+/*
+int n=5;
+String[] words= {"inch","cat","chin","kit","act"};
+
+int n=4;
+String[] words= {"pat","tap","apt","bat"};
+ */
+
+import java.util.Arrays;
+import java.util.Collections;
+
+public class GroupAnagrams {
+	public static void main(String[] args) {
+		int n=5;
+		String[] words= {"inch","cat","chin","kit","act"};		
+		
+		String[][] box=new String[n][50];
+		
+		for(int i=0;i<n;i++) {
+			box[i]=words[i].split("");
+		}
+		
+//		char t[]=words[0].toCharArray();
+//		Arrays.sort(t);
+//		System.out.println(Arrays.toString(t));
+		
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<box[i].length;j++) {
+				System.out.print(box[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<box[i].length-1;j++) {
+				for(int k=0;k<box[i].length-j-1;k++) {
+					if(box[i][k].compareTo(box[i][k+1])>0) {
+						String temp=box[i][k];
+						box[i][k]=box[i][k+1];
+						box[i][k+1]=temp;
+					}
+				}
+			}
+		}
+		System.out.println();
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<box[i].length;j++) {
+				System.out.print(box[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		int result=n;
+		for(int i=0;i<n-1;i++) {
+			for(int j=i+1;j<n;j++) {
+				if(box[i].length==box[j].length) {
+					int check=1;
+					for(int k=0;k<box[i].length;k++) {
+						if(box[i][k].compareTo(box[j][k])!=0) {
+							check=0;
+							break;
+						}
+					}
+					if(check==1) {
+						box[j][0]="0";
+					}
+				}
+			}
+		}
+		
+		System.out.println();
+		for(int i=0;i<n;i++) {
+			if(box[i][0].compareTo("0")==0) {
+				result-=1;
+			}
+		}
+		System.out.println("result - " + result);
+		
+	}
+}
