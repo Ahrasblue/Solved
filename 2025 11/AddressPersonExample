@@ -1,0 +1,110 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+class Person{
+	private String name;
+	private int age;
+	private String handPhone;
+	
+	Person(){
+		this.name="";
+		this.age=0;
+		this.handPhone="";
+	}
+	
+	Person(String name,int age, String handPhone){
+		this.name=name;
+		this.age=age;
+		this.handPhone=handPhone;
+	}
+	
+	String getName() {
+		return name;
+	}
+	
+	int getAge() {
+		return age;
+	}
+	
+	String getHandPhone() {
+		return handPhone;
+	}
+}
+class AddressPerson{
+	private ArrayList<Person> db;
+	
+	AddressPerson(){
+		db = new ArrayList<Person>();
+	}
+	
+	public void print() {
+		for(int i=0;i<db.size();i++) {
+			System.out.println("이름 : " + db.get(i).getName() + "  나이 : " + db.get(i).getAge() +
+					"  연락처 : " + db.get(i).getHandPhone());
+		}
+	}
+	
+	public void insert(Person p) {
+		db.add(p);
+	}
+	
+	public void delete(String name) {
+		for(int i=0;i<db.size();i++) {
+			if(db.get(i).getName().equals(name)) {
+				db.remove(i);
+				return;
+			}
+		}
+		System.out.println(name + " 님은 등록되지 않음");
+	}
+	
+	public void update(String name,Person p) {
+		for(int i=0;i<db.size();i++) {
+			if(db.get(i).getName().equals(name)) {
+				db.remove(i);
+				db.add(i, p);
+				System.out.println("정보 업데이트 완료");
+				for(int j=0;j<db.size();j++) {
+					System.out.println("이름 : " + db.get(j).getName() + "  나이 : " + db.get(j).getAge() +
+							"  연락처 : " + db.get(j).getHandPhone());
+				}
+				return;
+			}
+		}
+		System.out.println(name + "님은 등록되지 않음");
+	}
+}
+public class AddressPersonExample {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		AddressPerson ap = new AddressPerson();
+		while(true) {
+			System.out.println("1.삽입 2.출력 3.삭제 4.수정 5.종료 : ");
+			int a=s.nextInt();
+			if(a==1) {
+				System.out.println("이름 : ");
+				String name = s.next();
+				System.out.println("나이 : ");
+				int age = s.nextInt();
+				System.out.println("전화번호 : ");
+				String handPhone = s.next();
+				ap.insert(new Person(name,age,handPhone));
+			}else if(a==2) {
+				ap.print();
+			}else if(a==3) {
+				System.out.println("삭제할 회원이름 : ");
+				String dname = s.next();
+				ap.delete(dname);
+			}else if(a==4) {
+				System.out.println("수정할 회원 이름 : ");
+				String uname = s.next();
+				System.out.println("나이 수정 : ");
+				int uage = s.nextInt();
+				System.out.println("연락처 수정 : ");
+				String uhp = s.next();
+				ap.update(uname,new Person(uname,uage,uhp));
+			}else {
+				break;
+			}
+		}
+	}
+}
