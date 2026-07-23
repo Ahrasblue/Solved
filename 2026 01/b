@@ -1,0 +1,16 @@
+import java.util.Scanner;
+public class b {
+	static void re(int n,int now) {
+		if(now>0) {
+			System.out.println(now);
+			re(n,now-1);
+		}
+		return;
+	}
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.println("n - ");
+		int n=s.nextInt();
+		re(n,n);
+	}
+}
