@@ -1,0 +1,16 @@
+import java.util.Scanner;
+public class a {
+	static void re(int n) {
+		if(n>0) {
+			re(n-1);
+			System.out.println("recursive");
+		}
+		return;
+	}
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		System.out.println("n = ");
+		int n = s.nextInt();
+		re(n);
+	}
+}
