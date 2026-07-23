@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+class longStringSearch{
+	private ArrayList<String> stringList;
+	longStringSearch(int a){
+		stringList=new ArrayList<String>(a);
+	}
+	public void addString(String s) {
+		stringList.add(s);
+	}
+	public void listPrint() {
+		for(int i=0;i<stringList.size();i++) {
+			System.out.println(stringList.get(i));
+		}
+	}
+	public String longestString() {
+		int b=0;
+		for(int i=0;i<stringList.size();i++) {
+			if(stringList.get(b).length()<stringList.get(i).length()) {
+				b=i;
+			}
+		}
+		return stringList.get(b);
+	}
+	public ArrayList getter() {
+		return stringList;
+	}
+}
+public class StringSearchExample {
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.println("몇개의 이름을 입력하시나요? - ");
+		int a=s.nextInt();
+		longStringSearch lss=new longStringSearch(a);
+		System.out.println(a + "만큼의 ArrayList가 생성됨");
+		for(int i=0;i<a;i++) {
+			System.out.println((i+1) + "번째 이름 입력 - ");
+			String b=s.next();
+			lss.addString(b);
+		}
+		System.out.println("입력이 완료되었습니다.");
+		lss.listPrint();
+		System.out.println("가장 긴 이름 - " + lss.longestString());
+	}
+}
