@@ -1,0 +1,19 @@
+import java.util.Scanner;
+public class c {
+	static void re(int n,int res) {
+		if(n>0) {
+			res+=n;
+			re(n-1,res);
+		}
+		if(n==0) {
+			System.out.println(res);
+		}
+		return;
+	}
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.println("n - ");
+		int n = s.nextInt();
+		re(n,0);
+	}
+}
