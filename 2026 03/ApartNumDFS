@@ -1,0 +1,55 @@
+import java.util.*;
+public class a {
+	static int fullcount=0;
+	static int fclist[]=new int[100];
+	public static void dfs(int board[][],int check[][],int n,int x,int y,int cnt) {
+		if(x<0||x>=n||y<0||y>=n||board[x][y]==0||check[x][y]!=0) {
+			return;
+		}
+		check[x][y]=fullcount+1;
+		dfs(board,check,n,x-1,y,cnt+1);
+		dfs(board,check,n,x+1,y,cnt+1);
+		dfs(board,check,n,x,y-1,cnt+1);
+		dfs(board,check,n,x,y+1,cnt+1);
+	}
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n=s.nextInt();
+		int board[][]=new int[n][n];
+		int check[][]=new int[n][n];
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				board[i][j]=s.nextInt();
+			}
+		}
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(board[i][j]==1&&check[i][j]==0) {
+					dfs(board,check,n,i,j,1);
+					fullcount++;
+				}
+			}
+		}
+		int fc=fullcount;
+		for(int i=0;i<fullcount;i++) {
+			for(int j=0;j<n;j++) {
+				for(int k=0;k<n;k++) {
+					if(check[j][k]==fc) {
+						fclist[fc-1]++;
+					}
+				}
+			}
+			fc--;
+		}
+		System.out.println(fullcount);
+		for(int i=0;i<fullcount;i++) {
+			System.out.println(fclist[i]);
+		}
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				System.out.print(check[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
