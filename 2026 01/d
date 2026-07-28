@@ -1,0 +1,20 @@
+import java.util.Scanner;
+public class d {
+	static void re(int n,int res,int div){
+		if(n>0) {
+			System.out.println("res - " + n%div);
+			res+=(n%div)*(n%div);
+			re(n/div,res,div);
+		}
+		if(n==0) {
+			System.out.println(res);
+		}
+		return;
+	}
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.println("n - ");
+		int n=s.nextInt();
+		re(n,0,10);
+	}
+}
