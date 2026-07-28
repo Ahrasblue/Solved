@@ -1,0 +1,24 @@
+import java.util.Scanner;
+public class g {
+	static void re(int n,int num) {
+		if(n>0) {
+			if(n%2==0) {
+				System.out.println(n);
+				re(n/2,num+1);
+			}else {
+				System.out.println(n);
+				re(n/3,num+1);
+			}
+		}
+		if(n==0) {
+			System.out.println("횟수 - " + (num-1));
+		}
+		return;
+	}
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.println("n - ");
+		int n=s.nextInt();
+		re(n,0);
+	}
+}
