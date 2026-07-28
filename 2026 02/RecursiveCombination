@@ -1,0 +1,52 @@
+import java.util.*;
+public class b {
+	static int boardidx = 0;
+	static void re(int n, int k, int idx, int ans[], int s, int board[][]) {
+		if(idx==k) {
+			for(int i=0;i<k;i++) {
+				board[boardidx][i]=ans[i];
+			}
+			boardidx++;
+			return;
+		}
+		for(int i=s;i<n;i++) {
+			ans[idx]=i+1;
+			re(n,k,idx+1,ans,i+1,board);
+		}
+	}
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int k = s.nextInt();
+		int question[] = new int [3];
+		question[0] = s.nextInt();
+		question[1] = s.nextInt();
+		question[2] = s.nextInt();
+		int[] ans = new int[n];
+		int[][] board = new int[50][50];
+		re(n,k,0,ans,0,board);
+		for(int i=0;i<10;i++) {
+			for(int j=0;j<3;j++) {
+				System.out.print(board[i][j] + " ");
+			}
+			System.out.println();
+		}
+		int check = 0;
+		for(int i=0;i<10;i++) {
+			if(question[0]==board[i][0]&&question[1]==board[i][1]&&question[2]==board[i][2]) {
+				if(i==9) {
+					break;
+				}
+				System.out.print("answer : ");
+				for(int j=0;j<3;j++) {
+					System.out.print(board[i+1][j] + " ");
+				}
+				System.out.println();
+				check = 1;
+			}
+		}
+		if (check==0) {
+			System.out.println("NONE");
+		}
+	}
+}
