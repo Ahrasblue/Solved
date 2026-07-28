@@ -1,0 +1,27 @@
+import java.util.Scanner;
+public class a {
+	static void re(int[] ans,int idx,int[] tcnum,int s) {
+		if(idx==6) {
+			for(int i=0;i<6;i++) {
+				System.out.print(ans[i] + " ");
+			}
+			System.out.println();
+			return;
+		}
+		for(int i=s;i<tcnum.length;i++) {
+			ans[idx]=tcnum[i];
+			re(ans,idx+1,tcnum,i+1);
+		}
+	}
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		String tc = s.nextLine();
+		String tcsplit[] = tc.split(" ");
+		int tcnum[] = new int [tcsplit.length];
+		for(int i=0;i<tcsplit.length;i++) {
+			tcnum[i]=Integer.parseInt(tcsplit[i]);
+		}
+		int ans[] = new int[6];
+		re(ans,0,tcnum,1);
+	}
+}
