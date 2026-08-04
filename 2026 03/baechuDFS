@@ -1,0 +1,50 @@
+import java.util.*;
+public class baechuDFS {
+	public static void dfs(int[][] board,int[][] check,int x,int y,int m,int n) {
+		if(x<0||x>=m||y<0||y>=n||board[x][y]==0||check[x][y]==1) {
+			return;
+		}
+		check[x][y]=1;
+		dfs(board,check,x-1,y,m,n);
+		dfs(board,check,x+1,y,m,n);
+		dfs(board,check,x,y-1,m,n);
+		dfs(board,check,x,y+1,m,n);
+	}
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		int m=s.nextInt();
+		int n=s.nextInt();
+		int k=s.nextInt();
+		int[][] board=new int[m][n];
+		int[][] check=new int[m][n];
+		for(int i=0;i<k;i++) {
+			int x=s.nextInt();
+			int y=s.nextInt();
+			board[x][y]=1;
+		}
+		System.out.println();
+		for(int i=0;i<m;i++) {
+			for(int j=0;j<n;j++) {
+				System.out.print(board[i][j] + " ");
+			}
+			System.out.println();
+		}
+		int zirungyee=0;
+		for(int i=0;i<m;i++) {
+			for(int j=0;j<n;j++) {
+				if(board[i][j]==1&&check[i][j]==0) {
+					dfs(board,check,i,j,m,n);
+					zirungyee++;
+				}
+			}
+		}
+		System.out.println();
+		for(int i=0;i<m;i++) {
+			for(int j=0;j<n;j++) {
+				System.out.print(check[i][j] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println("zirungyee - " + zirungyee);
+	}
+}
