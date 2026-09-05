@@ -1,0 +1,47 @@
+/*
+String image="---><-----><-";
+
+String image="->-><-<-<--><->->";
+
+String image="<-----";
+*/
+public class ArrowSeparation {
+	public static void solution(String image) {
+		int barCount=0;
+		int rCheck=1;
+		int lCheck=1;
+		for(int i=0;i<image.length();i++) {
+			if(image.charAt(i)=='-') {
+				barCount++;
+			}
+			if(image.charAt(i)=='<') {
+				if(lCheck==1) {
+					lCheck=0;
+				}else if(lCheck==0) { // <---
+					System.out.println("[-1, " + barCount + "]");
+					barCount=0;
+				}
+				rCheck=0;
+			}
+			if(image.charAt(i)=='>') {
+				if(rCheck==0) { // <--->
+					System.out.println("[0, " + barCount + "]");
+					barCount=0;
+					rCheck=1;
+					lCheck=1;
+				}else if(rCheck==1) { // --->
+					System.out.println("[1, " + barCount + "]");
+					barCount=0;
+					rCheck=1;
+				}
+			}
+		}
+		if(barCount!=0) {
+			System.out.println("[-1, " + barCount + "]");
+		}
+	}	
+	public static void main(String[] args) {
+		String image="->-><-<-<--><->->";
+		solution(image);
+	}
+}
