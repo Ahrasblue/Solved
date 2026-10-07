@@ -1,0 +1,29 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <set>
+using namespace std;
+int solution(string message, vector<vector<int>> spoiler_ranges) {
+    int answer = 0;
+    string spoiled=message;
+    for(int i=0;i<spoiler_ranges.size();i++){
+        for(int j=spoiler_ranges[i][0];j<=spoiler_ranges[i][1];j++){
+            if(spoiled[j]!=' '){spoiled[j]='@';}
+        }
+    }
+    set<string> sWords; //spoil된 문자열을 공백 기준으로 나눠 담을 집합(중복 불가)
+    stringstream a(spoiled); //spoiled를 a에 담아 공백 기준으로 나눌 준비
+    string temp; //공백 기준으로 나눠 담을 임시 문자열
+    while(a >> temp){sWords.insert(temp);} //sWords에 spoil된 문자열 단어 나눠 담앗음
+    set<string> nWords; //정상 문자열 담을 집합(중복 불가)
+    stringstream b(message); //message 나눠 담을 준비
+    while(b>>temp){nWords.insert(temp);}
+    
+    for(string check:nWords){
+        if(sWords.count(check)==0){
+            answer++;
+        }
+    }
+    return answer;
+}
